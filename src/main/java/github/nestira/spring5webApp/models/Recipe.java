@@ -1,6 +1,7 @@
 package github.nestira.spring5webApp.models;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Recipe {
@@ -17,7 +18,11 @@ public class Recipe {
     private String url;
     private String directions;
 
+    // todo: add difficulty property
     //private Difficulty difficulty;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe") // Owner shall be in the "One" side
+    private Set<Ingredient> ingredients;
 
     @Lob
     private Byte[] image;
@@ -103,5 +108,13 @@ public class Recipe {
 
     public void setNote(Note note) {
         this.note = note;
+    }
+
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(Set<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 }

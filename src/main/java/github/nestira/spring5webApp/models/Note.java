@@ -9,7 +9,7 @@ public class Note {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(mappedBy = "note")
+    @OneToOne
     private Recipe recipe;
 
     @Lob // Large object blob
@@ -29,5 +29,13 @@ public class Note {
 
     public void setRecipeNote(String recipeNote) {
         this.recipeNote = recipeNote;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
