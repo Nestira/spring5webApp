@@ -1,6 +1,7 @@
 package github.nestira.spring5webApp.models;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -10,19 +11,21 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String decription;
+    private String description;
     private Integer prepTime;
     private Integer cookTime;
     private Integer servings; // The number of people it could serve
     private String source;
     private String url;
+
+    @Lob
     private String directions;
 
     @Enumerated(value = EnumType.STRING)
     private Difficulty difficulty;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe") // Owner shall be in the "One" side
-    private Set<Ingredient> ingredients;
+    private Set<Ingredient> ingredients = new HashSet<>();
 
     @Lob
     private Byte[] image;
@@ -34,7 +37,7 @@ public class Recipe {
     @JoinTable(name = "recipe_category_foo", joinColumns = @JoinColumn(name = "recipe_id"),
         inverseJoinColumns = @JoinColumn(name = "category_id"))
     // JoinTable so that only one mapping table is created. Otherwise, two mapping tables is created for each direction
-    private Set<Category> categories;
+    private Set<Category> categories = new HashSet<>();
 
     public Difficulty getDifficulty() {
         return difficulty;
@@ -52,12 +55,12 @@ public class Recipe {
         this.id = id;
     }
 
-    public String getDecription() {
-        return decription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDecription(String decription) {
-        this.decription = decription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Integer getPrepTime() {
@@ -130,5 +133,13 @@ public class Recipe {
 
     public void setIngredients(Set<Ingredient> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
 }

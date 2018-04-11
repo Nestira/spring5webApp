@@ -1,30 +1,32 @@
 package github.nestira.spring5webApp.controllers;
 
 import github.nestira.spring5webApp.models.Category;
+import github.nestira.spring5webApp.models.Recipe;
 import github.nestira.spring5webApp.models.UnitOfMeasure;
 import github.nestira.spring5webApp.repositories.RecipeRepository;
 import github.nestira.spring5webApp.repositories.UnitOfMeasureRepository;
+import github.nestira.spring5webApp.services.RecipeService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Optional;
+import java.util.Set;
 
 @Controller
 public class IndexController {
 
-    private RecipeRepository recipeRepository;
-    private UnitOfMeasureRepository unitOfMeasureRepository;
+    private RecipeService recipeService;
 
-    public IndexController(RecipeRepository recipeRepository, UnitOfMeasureRepository unitOfMeasureRepository) {
-        this.recipeRepository = recipeRepository;
-        this.unitOfMeasureRepository = unitOfMeasureRepository;
+    public IndexController(RecipeService recipeService) {
+        this.recipeService = recipeService;
     }
 
     @RequestMapping({"", "/", "/index"})
-    public String getIndexPage() {
+    public String getIndexPage(Model model) {
 
-        Optional<UnitOfMeasure> unitOfMeasure = unitOfMeasureRepository.findByDescription("Cup");
-        System.out.println("Cup Id is: " + unitOfMeasure.get().getId());
+        Set<Recipe> recipes = recipeService.getRecipes();
+        model.addAttribute("recipes", recipes);
         return "index";
     }
 }

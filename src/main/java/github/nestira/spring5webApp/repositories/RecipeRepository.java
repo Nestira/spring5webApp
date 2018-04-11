@@ -10,5 +10,5 @@ public interface RecipeRepository extends CrudRepository<Recipe, Long> {
     @Override
     Optional<Recipe> findById(Long aLong);
 
-    Optional<Recipe> findByDecription(String description);
+    Optional<Recipe> findByDescription(String description);
 }
