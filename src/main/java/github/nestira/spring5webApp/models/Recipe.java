@@ -18,8 +18,8 @@ public class Recipe {
     private String url;
     private String directions;
 
-    // todo: add difficulty property
-    //private Difficulty difficulty;
+    @Enumerated(value = EnumType.STRING)
+    private Difficulty difficulty;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe") // Owner shall be in the "One" side
     private Set<Ingredient> ingredients;
@@ -29,6 +29,14 @@ public class Recipe {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Note note;
+
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
+    }
 
     public Long getId() {
         return id;

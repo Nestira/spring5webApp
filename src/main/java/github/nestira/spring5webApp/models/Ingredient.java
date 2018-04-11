@@ -14,7 +14,7 @@ public class Ingredient {
 
     private BigDecimal amount;
 
-    @ManyToOne
+    @ManyToOne // Don't want to cascading back, so no cascading here
     private Recipe recipe;
 
     @OneToOne(fetch = FetchType.EAGER) // No cascade since we don't want to delete unit of measure.
