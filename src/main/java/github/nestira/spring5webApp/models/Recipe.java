@@ -30,6 +30,12 @@ public class Recipe {
     @OneToOne(cascade = CascadeType.ALL)
     private Note note;
 
+    @ManyToMany
+    @JoinTable(name = "recipe_category_foo", joinColumns = @JoinColumn(name = "recipe_id"),
+        inverseJoinColumns = @JoinColumn(name = "category_id"))
+    // JoinTable so that only one mapping table is created. Otherwise, two mapping tables is created for each direction
+    private Set<Category> categories;
+
     public Difficulty getDifficulty() {
         return difficulty;
     }
