@@ -35,19 +35,4 @@ public class Ingredient {
         this.recipe = recipe;
         this.uom = uom;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Ingredient that = (Ingredient) o;
-
-        return description.equals(that.description);
-    }
-
-    @Override
-    public int hashCode() {
-        return description.hashCode();
-    }
 }

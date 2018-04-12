@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Data
+@EqualsAndHashCode(exclude = {"prepTime", "cookTime", "servings", "source", "directions", "ingredients", "image",
+        "note", "categories"})
 @Entity
 public class Recipe {
 
@@ -51,20 +53,5 @@ public class Recipe {
         ingredient.setRecipe(this);
         this.ingredients.add(ingredient);
         return this;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Recipe recipe = (Recipe) o;
-
-        return description.equals(recipe.description);
-    }
-
-    @Override
-    public int hashCode() {
-        return description.hashCode();
     }
 }
