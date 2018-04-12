@@ -1,7 +1,11 @@
 package github.nestira.spring5webApp.models;
 
+import lombok.*;
+
 import javax.persistence.*;
 
+@Getter
+@Setter
 @Entity
 public class Note {
 
@@ -15,27 +19,6 @@ public class Note {
     @Lob // Large object blob
     private String recipeNote;
 
-    public Recipe getRecipe() {
-        return recipe;
-    }
 
-    public void setRecipe(Recipe recipe) {
-        this.recipe = recipe;
-    }
 
-    public String getRecipeNote() {
-        return recipeNote;
-    }
-
-    public void setRecipeNote(String recipeNote) {
-        this.recipeNote = recipeNote;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 }

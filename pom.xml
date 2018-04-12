@@ -62,6 +62,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <!--<version>1.16.12</version>-->
+        </dependency>
 
         <!-- Java 9 does not include these any more by default. Missing will cause class not found exception-->
         <!-- Java 6 = JAX-B Version 2.0   -->
