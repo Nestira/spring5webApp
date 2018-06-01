@@ -12,8 +12,8 @@ import java.util.Optional;
 
 import static org.junit.Assert.*;
 
-@RunWith(SpringRunner.class)
-@DataJpaTest // Spring Integration Test
+@RunWith(SpringRunner.class) // Integration test, need Spring DI.
+@DataJpaTest // Spring Integration Test. Using true Database.
 public class UnitOfMeasureRepositoryIT {
 
     @Autowired

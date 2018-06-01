@@ -62,6 +62,7 @@ public class IndexControllerTest {
 
         when(recipeService.getRecipes()).thenReturn(recipes);
 
+        // ArgumentCaptor
         ArgumentCaptor<Set<Recipe>> argumentCaptor = ArgumentCaptor.forClass(Set.class);
 
 
@@ -69,6 +70,8 @@ public class IndexControllerTest {
 
         assertEquals("index", templateName);
         verify(recipeService, times(1)).getRecipes();
+
+        //Catch the argument in addAttribute() method
         verify(model, times(1)).addAttribute(eq("recipes"), argumentCaptor.capture());
         assertEquals(recipes.size(), argumentCaptor.getValue().size());
     }

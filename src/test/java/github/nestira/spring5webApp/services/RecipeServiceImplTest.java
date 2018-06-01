@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -24,7 +25,7 @@ public class RecipeServiceImplTest {
 
     @Before
     public void setUp() throws Exception {
-        MockitoAnnotations.initMocks(this);
+            MockitoAnnotations.initMocks(this); //Create Mock objects for this class.
 
         recipeService = new RecipeServiceImpl(recipeRepository);
     }
@@ -35,6 +36,18 @@ public class RecipeServiceImplTest {
         Set<Recipe> recipes = recipeService.getRecipes();
 
         assertEquals(recipes.size(), 0);
+
+        // If you need the Mock object to return something different:
+        Recipe recipe = new Recipe();
+        HashSet recipesData = new HashSet();
+        recipesData.add(recipe); // Create the return object your want.
+
+        when(recipeService.getRecipes()).thenReturn(recipesData);
+
+        recipes = recipeService.getRecipes();
+        assertEquals(recipes.size(), 1); //true
+        verify(recipeRepository, times(2)).findAll();
+
     }
 
     @Test
