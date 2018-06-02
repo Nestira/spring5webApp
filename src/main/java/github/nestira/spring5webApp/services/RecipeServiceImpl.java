@@ -1,5 +1,8 @@
 package github.nestira.spring5webApp.services;
 
+import github.nestira.spring5webApp.commands.RecipeCommand;
+import github.nestira.spring5webApp.converters.RecipeCommandToRecipe;
+import github.nestira.spring5webApp.converters.RecipeToRecipeCommand;
 import github.nestira.spring5webApp.models.Recipe;
 import github.nestira.spring5webApp.repositories.RecipeRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -14,9 +17,14 @@ import java.util.Set;
 public class RecipeServiceImpl implements RecipeService {
 
     private final RecipeRepository recipeRepository;
+    private final RecipeCommandToRecipe recipeCommandToRecipe;
+    private final RecipeToRecipeCommand recipeToRecipeCommand;
 
-    public RecipeServiceImpl(RecipeRepository recipeRepository) {
+    public RecipeServiceImpl(RecipeRepository recipeRepository, RecipeCommandToRecipe recipeCommandToRecipe, RecipeToRecipeCommand recipeToRecipeCommand) {
         this.recipeRepository = recipeRepository;
+
+        this.recipeCommandToRecipe = recipeCommandToRecipe;
+        this.recipeToRecipeCommand = recipeToRecipeCommand;
     }
 
     @Override
@@ -42,5 +50,10 @@ public class RecipeServiceImpl implements RecipeService {
         }
 
         return recipeOptional.get();
+    }
+
+    @Override
+    public RecipeCommand saveRecipeCommand(RecipeCommand testRecipeCommand) {
+        return null;
     }
 }

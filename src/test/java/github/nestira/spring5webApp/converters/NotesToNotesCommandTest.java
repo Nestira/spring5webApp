@@ -42,7 +42,7 @@ public class NotesToNotesCommandTest {
         //then
         assertNotNull(command);
         assertEquals(ID_VALUE, command.getId());
-        assertEquals(RECIPE_NOTES, command.getRecipeNotes);
+        assertEquals(RECIPE_NOTES, command.getRecipeNotes());
     }
 
 }

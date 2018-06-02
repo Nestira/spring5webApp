@@ -34,7 +34,7 @@ public class NotesCommandToNotesTest {
 
         //given
         NotesCommand command = new NotesCommand();
-        command.setID(ID_VALUE);
+        command.setId(ID_VALUE);
         command.setRecipeNotes(RECIPE_NOTES);
 
         //when

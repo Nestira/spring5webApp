@@ -40,7 +40,7 @@ public class CategoryToCategoryCommandTest {
 
         //then
         assertEquals(ID_VALUE, categoryCommand.getId());
-        assertEquals(DESCRIPTION, categoryCommand.getDescription);
+        assertEquals(DESCRIPTION, categoryCommand.getDescription());
     }
 
 }

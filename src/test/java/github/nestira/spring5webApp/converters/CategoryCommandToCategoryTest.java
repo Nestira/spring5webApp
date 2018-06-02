@@ -33,7 +33,7 @@ public class CategoryCommandToCategoryTest {
         //given
         CategoryCommand categoryCommand = new CategoryCommand();
         categoryCommand.setId(ID_VALUE);
-        categoryCommand.setDecription(DESCRIPTION);
+        categoryCommand.setDescription(DESCRIPTION);
 
         //when
         Category category = converter.convert(categoryCommand);

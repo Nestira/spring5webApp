@@ -65,7 +65,7 @@ public class RecipeCommandToRecipeTest {
         NotesCommand notesCommand = new NotesCommand();
         notesCommand.setId(NOTES_ID);
 
-        command.setNote(notesCommand);
+        command.setNotesCommand(notesCommand);
 
         CategoryCommand category = new CategoryCommand();
         category.setId(CAT_ID_1);
@@ -80,8 +80,8 @@ public class RecipeCommandToRecipeTest {
         IngredientCommand ingredient2 = new IngredientCommand();
         ingredient2.setId(INGRED_ID_2);
 
-        recipeCommand.getIngredients().add(ingredient);
-        recipeCommand.getIngredients().add(ingredient2);
+        command.getIngredients().add(ingredient);
+        command.getIngredients().add(ingredient2);
 
         //when
         Recipe recipe = converter.convert(command);
