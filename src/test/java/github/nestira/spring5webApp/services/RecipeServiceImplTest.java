@@ -1,5 +1,7 @@
 package github.nestira.spring5webApp.services;
 
+import github.nestira.spring5webApp.converters.RecipeCommandToRecipe;
+import github.nestira.spring5webApp.converters.RecipeToRecipeCommand;
 import github.nestira.spring5webApp.models.Recipe;
 import github.nestira.spring5webApp.repositories.RecipeRepository;
 import org.junit.Before;
@@ -23,11 +25,17 @@ public class RecipeServiceImplTest {
     @Mock
     RecipeRepository recipeRepository;
 
+    @Mock
+    RecipeToRecipeCommand recipeToRecipeCommand;
+
+    @Mock
+    RecipeCommandToRecipe recipeCommandToRecipe;
+
     @Before
     public void setUp() throws Exception {
             MockitoAnnotations.initMocks(this); //Create Mock objects for this class.
 
-        recipeService = new RecipeServiceImpl(recipeRepository);
+        recipeService = new RecipeServiceImpl(recipeRepository, recipeCommandToRecipe, recipeToRecipeCommand);
     }
 
     @Test
