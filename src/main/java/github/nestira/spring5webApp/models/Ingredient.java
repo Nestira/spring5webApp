@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Data
+@ToString(exclude = {"id", "recipe"})
 @Entity
 public class Ingredient {
 
@@ -22,6 +23,8 @@ public class Ingredient {
 
     @OneToOne(fetch = FetchType.EAGER) // No cascade since we don't want to delete unit of measure.
     private UnitOfMeasure uom;
+
+    public Ingredient(){}
 
     public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom) {
         this.description = description;
