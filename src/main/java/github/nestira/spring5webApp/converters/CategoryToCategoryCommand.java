@@ -13,7 +13,15 @@ public class CategoryToCategoryCommand implements Converter<Category, CategoryCo
     @Synchronized
     @Nullable
     @Override
-    public CategoryCommand convert(Category category) {
-        return null;
+    public CategoryCommand convert(Category source) {
+
+        if (null == source)
+            return null;
+
+        CategoryCommand command = new CategoryCommand();
+        command.setId(source.getId());
+        command.setDescription(source.getDescription());
+
+        return command;
     }
 }

@@ -14,6 +14,14 @@ public class UnitOfMeasureCommandToUnitOfMeasure implements Converter<UnitOfMeas
     @Nullable
     @Override
     public UnitOfMeasure convert(UnitOfMeasureCommand unitOfMeasureCommand) {
-        return null;
+
+        if (null == unitOfMeasureCommand)
+            return null;
+
+        UnitOfMeasure unitOfMeasure = new UnitOfMeasure();
+        unitOfMeasure.setId(unitOfMeasureCommand.getId());
+        unitOfMeasure.setDescription(unitOfMeasureCommand.getDescription());
+
+        return unitOfMeasure;
     }
 }
