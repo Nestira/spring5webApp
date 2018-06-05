@@ -54,6 +54,12 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public RecipeCommand saveRecipeCommand(RecipeCommand testRecipeCommand) {
-        return null;
+
+        Recipe detachedRecipe = recipeCommandToRecipe.convert(testRecipeCommand);
+
+        Recipe savedRecipe = recipeRepository.save(detachedRecipe);
+        log.debug("Saved Recipe id: " + savedRecipe.getId());
+
+        return recipeToRecipeCommand.convert(savedRecipe);
     }
 }
