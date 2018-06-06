@@ -53,6 +53,11 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
+    public RecipeCommand findCommandById(Long l) {
+        return recipeToRecipeCommand.convert(findById(l));
+    }
+
+    @Override
     public RecipeCommand saveRecipeCommand(RecipeCommand testRecipeCommand) {
 
         Recipe detachedRecipe = recipeCommandToRecipe.convert(testRecipeCommand);
@@ -62,4 +67,5 @@ public class RecipeServiceImpl implements RecipeService {
 
         return recipeToRecipeCommand.convert(savedRecipe);
     }
+
 }

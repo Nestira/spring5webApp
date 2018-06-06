@@ -18,7 +18,7 @@
     <div class="row">
         <div class="col">
             <!--th:object is the object from Model attribute. it is actually RecipeCommand class-->
-            <form th:object="${recipe}" th:action="@{/recipe/}" method="post">
+            <form th:object="${recipe}" th:action="@{/recipe}" method="post">
                 <input type="hidden" th:field="*{id}"/>
                 <div class="panel-group">
                     <div class="panel panel-primary">

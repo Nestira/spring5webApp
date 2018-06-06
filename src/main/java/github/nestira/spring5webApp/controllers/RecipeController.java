@@ -20,7 +20,7 @@ public class RecipeController {
         this.recipeService = recipeService;
     }
 
-    @RequestMapping({"/recipe/show/{id}"})
+    @RequestMapping({"/recipe/{id}/show"})
     public String GetRecipe(@PathVariable String id, Model model) {
 
         model.addAttribute("recipe", recipeService.findById(Long.valueOf(id)));
@@ -34,12 +34,20 @@ public class RecipeController {
         return "recipe/recipeform";
     }
 
-    @PostMapping({"/recipe/"}) //match "th:action" in the form or object name? Maybe it has to match both
+    @PostMapping({"/recipe"}) //match "th:action" in the form or object name? Maybe it has to match both
     public String saveOrUpdate(@ModelAttribute RecipeCommand command) {
 
         log.debug(command.getDescription());
         RecipeCommand savedCommand = recipeService.saveRecipeCommand(command);
 
-        return "redirect:/recipe/show/" + savedCommand.getId();
+        return "redirect:/recipe/" + savedCommand.getId() + "/show";
+    }
+
+    @RequestMapping("/recipe/{id}/update")
+    public String getUpdateForm(@PathVariable String id, Model model) {
+
+        model.addAttribute("recipe", recipeService.findCommandById(Long.valueOf(id)));
+
+        return "recipe/recipeform";
     }
 }
