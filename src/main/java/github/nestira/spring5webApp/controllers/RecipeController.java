@@ -1,11 +1,13 @@
 package github.nestira.spring5webApp.controllers;
 
 import github.nestira.spring5webApp.commands.RecipeCommand;
+import github.nestira.spring5webApp.exceptions.NotFoundException;
 import github.nestira.spring5webApp.services.RecipeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 @Slf4j
 @Controller
@@ -17,14 +19,14 @@ public class RecipeController {
         this.recipeService = recipeService;
     }
 
-    @RequestMapping({"/recipe/{id}/show"})
+    @GetMapping({"/recipe/{id}/show"})
     public String GetRecipe(@PathVariable String id, Model model) {
 
         model.addAttribute("recipe", recipeService.findById(Long.valueOf(id)));
         return "recipe/show";
     }
 
-    @RequestMapping({"/recipe/new"})
+    @GetMapping({"/recipe/new"})
     public String newRecipe(Model model) {
 
         model.addAttribute("recipe", new RecipeCommand()); //"recipe" match object name in html.
@@ -40,7 +42,7 @@ public class RecipeController {
         return "redirect:/recipe/" + savedCommand.getId() + "/show";
     }
 
-    @RequestMapping("/recipe/{id}/update")
+    @GetMapping("/recipe/{id}/update")
     public String getUpdateForm(@PathVariable String id, Model model) {
 
         model.addAttribute("recipe", recipeService.findCommandById(Long.valueOf(id)));
@@ -55,5 +57,15 @@ public class RecipeController {
 
         recipeService.deleteById(Long.valueOf(id));
         return "redirect:/";
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ModelAndView handleNotFound() {
+
+        log.error("Handling not found exception");
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("404error");
+
+        return modelAndView;
     }
 }
