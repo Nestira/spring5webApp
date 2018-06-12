@@ -2,6 +2,7 @@ package github.nestira.spring5webApp.converters;
 
 import github.nestira.spring5webApp.commands.IngredientCommand;
 import github.nestira.spring5webApp.models.Ingredient;
+import github.nestira.spring5webApp.models.Recipe;
 import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
@@ -27,6 +28,14 @@ public class IngredientCommandToIngredient implements Converter<IngredientComman
         Ingredient ingredient = new Ingredient();
 
         ingredient.setId(source.getId());
+
+        if (source.getRecipeId() != null) {
+            Recipe recipe = new Recipe();
+            recipe.setId(source.getRecipeId());
+            ingredient.setRecipe(recipe);
+            recipe.addIngredient(ingredient);
+        }
+
         ingredient.setDescription(source.getDescription());
         ingredient.setAmount(source.getAmount());
         ingredient.setUom(

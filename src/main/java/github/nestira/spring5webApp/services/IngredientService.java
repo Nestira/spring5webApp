@@ -7,4 +7,8 @@ import org.springframework.stereotype.Service;
 @Service
 public interface IngredientService {
     IngredientCommand findByRecipeIdAndIngredientId(Long aLong, Long aLong1);
+
+    IngredientCommand saveIngredientCommand(IngredientCommand command);
+
+    void deleteByRecipeIdAndIngredientId(Long aLong, Long aLong1);
 }
