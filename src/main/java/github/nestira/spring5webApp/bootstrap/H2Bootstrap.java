@@ -5,6 +5,7 @@ import github.nestira.spring5webApp.repositories.CategoryRepository;
 import github.nestira.spring5webApp.repositories.RecipeRepository;
 import github.nestira.spring5webApp.repositories.UnitOfMeasureRepository;
 import org.springframework.context.ApplicationListener;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,13 +16,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> {
+@Profile("default")
+public class H2Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     private final RecipeRepository recipeRepository;
     private final CategoryRepository categoryRepository;
     private final UnitOfMeasureRepository unitOfMeasureRepository;
 
-    public DevBootstrap(RecipeRepository recipeRepository, CategoryRepository categoryRepository, UnitOfMeasureRepository unitOfMeasureRepository) {
+    public H2Bootstrap(RecipeRepository recipeRepository, CategoryRepository categoryRepository, UnitOfMeasureRepository unitOfMeasureRepository) {
         this.recipeRepository = recipeRepository;
         this.categoryRepository = categoryRepository;
         this.unitOfMeasureRepository = unitOfMeasureRepository;

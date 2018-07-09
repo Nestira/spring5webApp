@@ -7,6 +7,7 @@ import github.nestira.spring5webApp.models.Recipe;
 import github.nestira.spring5webApp.repositories.RecipeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -52,8 +53,26 @@ public class RecipeServiceImpl implements RecipeService {
         return recipeOptional.get();
     }
 
+    @Transactional
+    @Override
+    public RecipeCommand findCommandById(Long l) {
+        return recipeToRecipeCommand.convert(findById(l));
+    }
+
+    @Transactional
     @Override
     public RecipeCommand saveRecipeCommand(RecipeCommand testRecipeCommand) {
-        return null;
+
+        Recipe detachedRecipe = recipeCommandToRecipe.convert(testRecipeCommand);
+
+        Recipe savedRecipe = recipeRepository.save(detachedRecipe);
+        log.debug("Saved Recipe id: " + savedRecipe.getId());
+
+        return recipeToRecipeCommand.convert(savedRecipe);
+    }
+
+    @Override
+    public void deleteById(Long l) {
+        recipeRepository.deleteById(l);
     }
 }
